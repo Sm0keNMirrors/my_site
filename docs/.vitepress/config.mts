@@ -2,6 +2,7 @@ import { defineConfig } from 'vitepress'
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
+  base: '/my_site/',
   title: "Mahro Hektap",
   description: "SmokeNMirrors' Blog (Xian Yaohan)",
   themeConfig: {
