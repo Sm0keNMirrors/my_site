@@ -1,0 +1,29 @@
+/* .vitepress/theme/custom.css */
+
+:root {
+  /* 如果你想在亮色模式和暗色模式下使用不同的透明度，可以在这里调整 */
+}
+
+body {
+  background-image: url('/bg.png'); /* 这里的路径指向 public 目录 */
+  background-attachment: fixed;        /* 背景固定，不随滚动条滚动 */
+  background-size: cover;              /* 覆盖整个屏幕 */
+  background-position: center;         /* 居中显示 */
+  background-repeat: no-repeat;
+}
+
+/* 关键：将 VitePress 默认的主题背景色设为透明 */
+/* 否则默认的白色或黑色背景会盖住 body 的背景图 */
+#app, .VPApp {
+  background-color: transparent !important;
+}
+
+/* 如果你发现内容区域背景太透，导致文字看不清，可以给内容区加一个半透明背景 */
+.VPContent {
+  background-color: rgba(255, 255, 255, 0.7); /* 亮色模式下的半透明白 */
+}
+
+/* 暗色模式下的调整 */
+.dark .VPContent {
+  background-color: rgba(30, 30, 30, 0.8);    /* 暗色模式下的半透明黑 */
+}
