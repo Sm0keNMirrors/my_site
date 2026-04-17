@@ -4,6 +4,42 @@
   /* 如果你想在亮色模式和暗色模式下使用不同的透明度，可以在这里调整 */
 }
 
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  /* 这里的渐变可以根据你的背景图色调调整 */
+  background: linear-gradient(
+    135deg, 
+    rgba(0, 0, 0, 0.4) 0%, 
+    rgba(0, 0, 0, 0.2) 100%
+  );
+  z-index: -1; /* 确保在背景图之上，但在内容之下 */
+}
+
+.VPNavBar {
+  background-color: rgba(255, 255, 255, 0.6) !important;
+  backdrop-filter: blur(12px); /* 核心：模糊背景 */
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+/* 如果是暗色模式 */
+.dark .VPNavBar {
+  background-color: rgba(30, 30, 30, 0.4) !important;
+  backdrop-filter: blur(12px);
+}
+
+/* 链接悬停时轻轻上移并变色 */
+/* a:hover {
+  color: var(--vp-c-brand-1);
+  transition: all 0.3s ease;
+  transform: translateY(-2px);
+  display: inline-block;
+} */
+
 body {
   background-image: url('/bg.png'); /* 这里的路径指向 public 目录 */
   background-attachment: fixed;        /* 背景固定，不随滚动条滚动 */
@@ -20,7 +56,7 @@ body {
 
 /* 如果你发现内容区域背景太透，导致文字看不清，可以给内容区加一个半透明背景 */
 .VPContent {
-  background-color: rgba(255, 255, 255, 0.7); /* 亮色模式下的半透明白 */
+  background-color: rgba(255, 255, 255, 0.35); /* 亮色模式下的半透明白 */
 }
 
 /* 暗色模式下的调整 */
