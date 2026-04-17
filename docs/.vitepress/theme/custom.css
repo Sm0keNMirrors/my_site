@@ -63,3 +63,110 @@ body {
 .dark .VPContent {
   background-color: rgba(30, 30, 30, 0.8);    /* 暗色模式下的半透明黑 */
 }
+
+/* 1. 控制名字 (Mahro Hektap) - 最大 */
+.VPHero .name {
+  font-size: 5rem; /* 根据需要调整，比如 5rem 或 80px */
+  line-height: 1.2;
+  font-weight: 800;
+  display: block;
+}
+
+/* 2. 控制介绍 (SmokeNMirrors' Blog) - 次之 */
+.VPHero .text {
+  font-size: 2.2rem;
+  font-weight: 600;
+  color: var(--vp-c-text-1);
+  margin-top: 1rem;
+}
+
+/* 3. 控制签名 (Tagline) - 最小且有签名感 */
+.VPHero .tagline {
+  font-size: 1.2rem;
+  color: #f5f5f5 !important; /* 这里直接指定接近纯黑，或者使用你的品牌色 */
+  font-style: italic; /* 斜体增加签名感 */
+  margin-top: 0.5rem;
+  max-width: 800px;
+}
+
+/* 2. 深色模式下的回退：保持原有的浅灰色变量，防止隐身 */
+.dark .VPHero .tagline {
+  color: var(--vp-c-text-2) !important;
+}
+
+
+
+
+
+
+.VPHero .VPImage {
+  width: 280px;
+  height: 280px;
+  object-fit: cover;
+  border-radius: 50% !important;
+  border: 1px solid var(--vp-c-divider);
+  padding: 4px;
+  background: var(--vp-c-bg-soft);
+  box-shadow: var(--vp-shadow-3);
+
+  /* --- 修复移动/抖动的核心代码 --- */
+  
+  /* 1. 明确设置变换中心为正中心 */
+  transform-origin: center center;
+
+  /* 2. 预留变换空间，防止亚像素渲染导致的 1px 偏移 */
+  backface-visibility: hidden;
+  -webkit-font-smoothing: subpixel-antialiased;
+  
+  /* 3. 强制开启 GPU 硬件加速 */
+  will-change: transform;
+  transform: translateZ(0); 
+
+  /* 4. 让过渡动画更平滑 (使用 cubic-bezier 效果更好) */
+  transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+.VPHero .VPImage:hover {
+  /* 5. 悬停时保持 translateZ(0) 以维持硬件加速状态，防止切换瞬间闪烁 */
+  transform: scale(1.05) translateZ(0);
+}
+/* 移动端适配 */
+@media (max-width: 640px) {
+  /* ... 其他移动端文字适配 ... */
+  .VPHero .VPImage { 
+    width: 180px; /* 移动端缩小尺寸，但保持正方形 */
+    height: 180px; 
+  }
+}
+
+
+
+
+
+/* 3. 头像下方信息区样式 */
+.avatar-info {
+  margin-top: 20px;
+  text-align: center;
+  font-family: var(--vp-font-family-base);
+}
+.info-name {
+  font-weight: 600;
+  font-size: 1.2rem;
+  margin-bottom: 8px;
+  color: var(--vp-c-text-1);
+}
+.info-desc {
+  font-size: 0.9rem;
+  color: var(--vp-c-text-2);
+  margin: 4px 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+}
+
+/* 适配移动端 */
+@media (max-width: 640px) {
+  .VPHero .name { font-size: 3rem; }
+  .VPHero .text { font-size: 1.4rem; }
+  .VPHero .VPImage { width: 160px; height: 160px; }
+}
