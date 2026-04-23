@@ -1,172 +1,581 @@
 /* .vitepress/theme/custom.css */
 
+
+
+
+
 :root {
-  /* 如果你想在亮色模式和暗色模式下使用不同的透明度，可以在这里调整 */
+  --bg-overlay: linear-gradient(
+    135deg,
+    rgba(0, 0, 0, 0.4) 0%,
+    rgba(0, 0, 0, 0.2) 100%
+  );
+
+  --glass-light: rgba(255, 255, 255, 0.6);
+  --glass-dark: rgba(30, 30, 30, 0.4);
+  --content-light: rgba(255, 255, 255, 0.35);
+  --content-dark: rgba(30, 30, 30, 0.8);
+
+  --hero-avatar-size: clamp(160px, 25vw, 300px);
+  --hero-top-space: 40px;
+  --hero-top-space-mobile: 24px;
 }
 
+/* 全站背景图 */
+body {
+  background: url('/bg.png') center / cover no-repeat fixed;
+}
+
+/* 背景遮罩 */
 body::before {
   content: "";
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  /* 这里的渐变可以根据你的背景图色调调整 */
-  background: linear-gradient(
-    135deg, 
-    rgba(0, 0, 0, 0.4) 0%, 
-    rgba(0, 0, 0, 0.2) 100%
-  );
-  z-index: -1; /* 确保在背景图之上，但在内容之下 */
+  inset: 0;
+  background: var(--bg-overlay);
+  z-index: -1;
 }
+
+/* 让应用层透明，露出 body 背景 */
+#app,
+.VPApp {
+  background: transparent !important;
+}
+
+
+
+
+
 
 .VPNavBar {
-  background-color: rgba(255, 255, 255, 0.6) !important;
-  backdrop-filter: blur(12px); /* 核心：模糊背景 */
-  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
-}
-
-/* 如果是暗色模式 */
-.dark .VPNavBar {
-  background-color: rgba(30, 30, 30, 0.4) !important;
+  background: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0.918),
+    rgba(255,255,255,0)
+  ) !important;
   backdrop-filter: blur(12px);
+  border: none !important;
+  box-shadow: none !important;
 }
 
-/* 链接悬停时轻轻上移并变色 */
-/* a:hover {
-  color: var(--vp-c-brand-1);
-  transition: all 0.3s ease;
-  transform: translateY(-2px);
-  display: inline-block;
-} */
-
-body {
-  background-image: url('/bg.png'); /* 这里的路径指向 public 目录 */
-  background-attachment: fixed;        /* 背景固定，不随滚动条滚动 */
-  background-size: cover;              /* 覆盖整个屏幕 */
-  background-position: center;         /* 居中显示 */
-  background-repeat: no-repeat;
+.dark .VPNavBar {
+  background: linear-gradient(
+    to bottom,
+    rgba(30,30,30,0.7),
+    rgba(30,30,30,0)
+  ) !important;
 }
 
-/* 关键：将 VitePress 默认的主题背景色设为透明 */
-/* 否则默认的白色或黑色背景会盖住 body 的背景图 */
-#app, .VPApp {
-  background-color: transparent !important;
+
+
+
+
+
+/* 文档页顶部导航真正有背景的那层 */
+.VPNavBar:not(.home.top) .content-body {
+  background: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0.72) 0%,
+    rgba(255, 255, 255, 0.48) 60%,
+    rgba(255, 255, 255, 0) 100%
+  ) !important;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
 }
 
-/* 如果你发现内容区域背景太透，导致文字看不清，可以给内容区加一个半透明背景 */
+/* 去掉文档页顶部那条线 */
+.VPNavBar:not(.home) .divider-line,
+.VPNavBar:not(.has-sidebar):not(.home.top) .divider {
+  background: transparent !important;
+}
+
+/* 暗色模式 */
+.dark .VPNavBar:not(.home.top) .content-body {
+  background: linear-gradient(
+    to bottom,
+    rgba(30, 30, 30, 0.72) 0%,
+    rgba(30, 30, 30, 0.48) 60%,
+    rgba(30, 30, 30, 0) 100%
+  ) !important;
+}
+
+
+
+
+
+/* =============================================================================
+   COMPONENTS - 左侧侧边栏相关设置
+   ========================================================================== */
+.VPSidebar {
+  background: rgba(255, 255, 255, 0.32) !important;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-right: none !important;
+}
+
+.dark .VPSidebar {
+  background: rgba(30, 30, 30, 0.72) !important;
+}
+
+/* 侧边栏内部区域 */
+.VPSidebar .curtain {
+  background: transparent !important;
+}
+
+/* 文档内容区 */
+.VPDoc {
+  background: transparent;
+}
+
+/* =================================
+   SIDEBAR AREA - 整个左侧区域入场动画
+   ================================== */
+
+/* 1. 针对整个侧边栏容器 */
+.VPSidebar {
+  /* 初始入场动画 */
+  animation: sidebar-container-enter 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  
+  /* 这里的背景色可以微调，增加毛玻璃感（可选） */
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  
+  /* 确保动画过程中平滑 */
+  will-change: transform, opacity;
+}
+
+/* 2. 定义整个区域的入场轨迹 */
+@keyframes sidebar-container-enter {
+  0% {
+    opacity: 0;
+    /* 稍微缩小并向左偏移 */
+    transform: translateX(-40px) scaleX(0.95);
+    /* 侧边栏右侧的边框发光或阴影 */
+    box-shadow: -20px 0 50px rgba(0, 0, 0, 0);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0) scaleX(1);
+    /* 恢复正常的边框线，或者加一个淡淡的投影感 */
+    box-shadow: 10px 0 30px rgba(0, 0, 0, 0.05);
+  }
+}
+
+/* 3. 装饰：侧边栏右侧的分割线动画 */
+.VPSidebar::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  top: 0;
+  height: 100%;
+  width: 1px;
+  background: linear-gradient(to bottom, 
+    transparent, 
+    var(--vp-c-brand-1), 
+    transparent
+  );
+  opacity: 0;
+  animation: sidebar-line-fade 1.2s ease-in-out forwards 0.3s;
+}
+
+@keyframes sidebar-line-fade {
+  0% { opacity: 0; height: 0; }
+  100% { opacity: 0.3; height: 100%; }
+}
+
+/* 4. 移动端适配：防止手机端展开时动画太奇怪 */
+@media (max-width: 960px) {
+  .VPSidebar {
+    /* 手机端保持原有的侧滑逻辑，或者使用更轻量的动画 */
+    animation-duration: 0.4s;
+  }
+}
+
+/* 定义侧边栏的退场轨迹 */
+@keyframes sidebar-container-exit {
+  0% {
+    opacity: 1;
+    transform: translateX(0) scaleX(1);
+    box-shadow: 10px 0 30px rgba(0, 0, 0, 0.05);
+  }
+  100% {
+    opacity: 0;
+    /* 向左偏移并轻微缩小 */
+    transform: translateX(-40px) scaleX(0.95);
+    box-shadow: -20px 0 50px rgba(0, 0, 0, 0);
+  }
+}
+
+/* 定义装饰线条的淡出 */
+@keyframes sidebar-line-fade-out {
+  0% { opacity: 0.3; height: 100%; }
+  100% { opacity: 0; height: 0; }
+}
+
+/* =================================
+   SIDEBAR 状态切换控制
+   ================================== */
+
+.VPSidebar {
+  /* 默认状态：配合 transition 实现双向平滑 */
+  opacity: 0;
+  transform: translateX(-40px) scaleX(0.95);
+  transition: 
+    opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.5s ease;
+  
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  will-change: transform, opacity;
+}
+
+/* 当侧边栏处于激活/显示状态时 (VitePress 核心类或自定义触发) */
+/* 注意：VitePress 移动端展开会在 html 挂载 .sidebar-open */
+.sidebar-open .VPSidebar, 
+.VPSidebar {
+  /* 如果是在桌面端常驻，则默认 opacity 1 
+     如果需要根据逻辑隐藏，请确保父级有状态类 */
+  opacity: 1;
+  transform: translateX(0) scaleX(1);
+  box-shadow: 10px 0 30px rgba(0, 0, 0, 0.05);
+}
+
+/* 针对 VitePress 侧边栏装饰线的淡入淡出 */
+.VPSidebar::after {
+  content: "";
+  position: absolute;
+  right: 0; top: 0;
+  width: 1px;
+  background: linear-gradient(to bottom, transparent, var(--vp-c-brand-1), transparent);
+  
+  /* 这里的 transition 会处理进入和退出 */
+  height: 0;
+  opacity: 0;
+  transition: height 0.8s ease, opacity 0.5s ease;
+}
+
+.sidebar-open .VPSidebar::after {
+  height: 100%;
+  opacity: 0.3;
+}
+
+/* ============================================================================= */
+
+
+
+
+
+
+
+
+
+
+/* =============================================================================
+   COMPONENTS - 右侧滚动条修复及美化
+   ========================================================================== */
+html {
+  /* 在内容溢出前就预留出滚动条的间距 */
+  scrollbar-gutter: stable;
+}
+
+/* 如果你希望在移动端或不需要的时候不预留，可以配合媒体查询 */
+@media (min-width: 960px) {
+  html {
+    scrollbar-gutter: stable;
+  }
+}
+.VPSidebar {
+  /* 隐藏默认的横向溢出，并优化垂直滚动 */
+  overflow-x: hidden !important;
+  /* 使用 overlay 让滚动条悬浮在内容之上（部分现代浏览器支持） */
+  /* 或者配合 scrollbar-gutter */
+  scrollbar-gutter: stable;
+}
+/* =================================
+   CUSTOM SCROLLBAR - 自定义滚动条美化
+   ================================== */
+
+/* 1. 整体滚动条容器 */
+::-webkit-scrollbar {
+  width: 6px;  /* 纵向滚动条宽度 */
+  height: 6px; /* 横向滚动条高度 */
+}
+
+/* 2. 滚动条轨道 (Track) */
+::-webkit-scrollbar-track {
+  background: transparent; 
+}
+
+/* 3. 滚动条滑块 (Thumb) */
+::-webkit-scrollbar-thumb {
+  background-color: var(--vp-c-divider); /* 使用 VitePress 默认分割线颜色 */
+  border-radius: 10px;
+  transition: background 0.3s ease;
+}
+
+/* 4. 鼠标悬停在滑块上时加深颜色 */
+::-webkit-scrollbar-thumb:hover {
+  background-color: var(--vp-c-brand-1); /* 悬停时变为主题色 */
+}
+
+/* 针对 Firefox 的适配 */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--vp-c-divider) transparent;
+}
+
+/* 特别针对侧边栏内部的滚动条优化 */
+.VPSidebar .container {
+  /* 让侧边栏滚动条更隐形，只有滚动时才明显 */
+  scrollbar-width: thin;
+}
+/* ============================================================================= */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* 内容区半透明 */
 .VPContent {
-  background-color: rgba(255, 255, 255, 0.35); /* 亮色模式下的半透明白 */
+  background: var(--content-light);
 }
 
-/* 暗色模式下的调整 */
 .dark .VPContent {
-  background-color: rgba(30, 30, 30, 0.8);    /* 暗色模式下的半透明黑 */
+  background: var(--content-dark);
 }
 
-/* 1. 控制名字 (Mahro Hektap) - 最大 */
+/* Hero 整体上边距 */
+.VPHome .VPHero .container {
+  padding-top: var(--hero-top-space);
+}
+
+/* Hero 文案 */
 .VPHero .name {
-  font-size: 5rem; /* 根据需要调整，比如 5rem 或 80px */
+  display: block;
+  font-size: 5rem;
   line-height: 1.2;
   font-weight: 800;
-  display: block;
 }
 
-/* 2. 控制介绍 (SmokeNMirrors' Blog) - 次之 */
 .VPHero .text {
+  margin-top: 1rem;
   font-size: 2.2rem;
   font-weight: 600;
   color: var(--vp-c-text-1);
-  margin-top: 1rem;
 }
 
-/* 3. 控制签名 (Tagline) - 最小且有签名感 */
 .VPHero .tagline {
-  font-size: 1.2rem;
-  color: #f5f5f5 !important; /* 这里直接指定接近纯黑，或者使用你的品牌色 */
-  font-style: italic; /* 斜体增加签名感 */
   margin-top: 0.5rem;
   max-width: 800px;
+  font-size: 1.2rem;
+  font-style: italic;
+  color: #f5f5f5 !important;
 }
 
-/* 2. 深色模式下的回退：保持原有的浅灰色变量，防止隐身 */
 .dark .VPHero .tagline {
   color: var(--vp-c-text-2) !important;
 }
 
+/* Hero 头像区域 */
+.VPHero .VPHeroImage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 
-
-
-
-
+/* 圆形头像 */
 .VPHero .VPImage {
-  width: 280px;
-  height: 280px;
+  width: var(--hero-avatar-size);
+  height: var(--hero-avatar-size);
   object-fit: cover;
   border-radius: 50% !important;
   border: 1px solid var(--vp-c-divider);
   padding: 4px;
   background: var(--vp-c-bg-soft);
   box-shadow: var(--vp-shadow-3);
-
-  /* --- 修复移动/抖动的核心代码 --- */
-  
-  /* 1. 明确设置变换中心为正中心 */
-  transform-origin: center center;
-
-  /* 2. 预留变换空间，防止亚像素渲染导致的 1px 偏移 */
-  backface-visibility: hidden;
-  -webkit-font-smoothing: subpixel-antialiased;
-  
-  /* 3. 强制开启 GPU 硬件加速 */
-  will-change: transform;
-  transform: translateZ(0); 
-
-  /* 4. 让过渡动画更平滑 (使用 cubic-bezier 效果更好) */
-  transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-}
-.VPHero .VPImage:hover {
-  /* 5. 悬停时保持 translateZ(0) 以维持硬件加速状态，防止切换瞬间闪烁 */
-  transform: scale(1.05) translateZ(0);
-}
-/* 移动端适配 */
-@media (max-width: 640px) {
-  /* ... 其他移动端文字适配 ... */
-  .VPHero .VPImage { 
-    width: 180px; /* 移动端缩小尺寸，但保持正方形 */
-    height: 180px; 
-  }
+  transition: transform 0.3s ease;
 }
 
-
-
-
-
-/* 3. 头像下方信息区样式 */
+/* 头像下方信息 */
 .avatar-info {
   margin-top: 20px;
+  max-width: var(--hero-avatar-size);
   text-align: center;
   font-family: var(--vp-font-family-base);
 }
+
 .info-name {
-  font-weight: 600;
-  font-size: 1.2rem;
   margin-bottom: 8px;
+  font-size: 1.2rem;
+  font-weight: 600;
   color: var(--vp-c-text-1);
 }
+
 .info-desc {
-  font-size: 0.9rem;
-  color: var(--vp-c-text-2);
-  margin: 4px 0;
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 5px;
+  margin: 4px 0;
+  font-size: 0.9rem;
+  color: var(--vp-c-text-2);
 }
 
-/* 适配移动端 */
+
+
+
+
+.VPHome .VPHero .container {
+  position: relative;
+  z-index: 1;
+  padding: 48px;
+  border-radius: 36px;
+}
+
+.VPHome .VPHero .container::before,
+.VPHome .VPHero .container::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 36px;
+  pointer-events: none;
+}
+
+.VPHome .VPHero .container::before {
+  z-index: -2;
+  background: rgba(255, 255, 255, 0.12);
+  /* backdrop-filter: blur(18px); */
+  /* -webkit-backdrop-filter: blur(18px);
+  border: 1px solid rgba(255, 255, 255, 0.18); */
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+}
+
+.VPHome .VPHero .container::after {
+  z-index: -1;
+  background:
+    radial-gradient(circle at top left, rgba(255,255,255,0.18), transparent 35%),
+    radial-gradient(circle at top right, rgba(255,255,255,0.12), transparent 35%),
+    radial-gradient(circle at bottom left, rgba(255,255,255,0.10), transparent 30%),
+    radial-gradient(circle at bottom right, rgba(255,255,255,0.08), transparent 30%);
+}
+
+
+
+
+
+
+
+
+
+
+/* 移动端 */
+@media (max-width: 960px) {
+  .VPHome .VPHero .container {
+    padding-top: var(--hero-top-space-mobile);
+  }
+}
+
 @media (max-width: 640px) {
-  .VPHero .name { font-size: 3rem; }
-  .VPHero .text { font-size: 1.4rem; }
-  .VPHero .VPImage { width: 160px; height: 160px; }
+  .VPHero .name {
+    font-size: 3rem;
+  }
+
+  .VPHero .text {
+    font-size: 1.4rem;
+  }
+
+  .VPHero .VPImage {
+    width: 160px;
+    height: 160px;
+  }
+
+
+
+
+
+
+
+
+
+
+  /* =================================
+   VIEW TRANSITION 动画定义
+   ================================== */
+
+/* 1. 针对支持 View Transition 的浏览器 */
+::view-transition-old(root) {
+  /* 旧页面（包含侧边栏）消失时的动画 */
+  animation: 400ms cubic-bezier(0.4, 0, 0.2, 1) both fade-out,
+             400ms cubic-bezier(0.4, 0, 0.2, 1) both scale-down;
+}
+
+::view-transition-new(root) {
+  /* 新页面进入时的动画 */
+  animation: 400ms cubic-bezier(0.4, 0, 0.2, 1) both fade-in,
+             400ms cubic-bezier(0.4, 0, 0.2, 1) both scale-up;
+}
+
+/* 2. 动画细节：淡入淡出 + 轻微缩放偏移 */
+@keyframes fade-out {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes scale-down {
+  from { transform: scale(1); }
+  to { transform: scale(0.98) translateX(-10px); }
+}
+@keyframes scale-up {
+  from { transform: scale(1.02) translateX(10px); }
+  to { transform: scale(1); }
+}
+
+/* 3. 必须：保持动画过程中背景色一致，防止闪白 */
+::view-transition-group(root) {
+  animation-duration: 400ms;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
 }
