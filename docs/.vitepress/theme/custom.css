@@ -2,8 +2,6 @@
 
 
 
-
-
 :root {
   --bg-overlay: linear-gradient(
     135deg,
@@ -71,7 +69,7 @@ body::before {
 
 
 /* 文档页顶部导航真正有背景的那层 */
-.VPNavBar:not(.home.top) .content-body {
+/* .VPNavBar:not(.home.top) .content-body {
   background: linear-gradient(
     to bottom,
     rgba(255, 255, 255, 0.72) 0%,
@@ -80,7 +78,7 @@ body::before {
   ) !important;
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-}
+} */
 
 /* 去掉文档页顶部那条线 */
 .VPNavBar:not(.home) .divider-line,
@@ -337,6 +335,379 @@ html {
 
 
 
+  /* =================================
+    整体字体设置
+   ================================== */
+/* 一级按钮文字 */
+.VPSidebarItem .text {
+  font-size: 18px;
+}
+
+/* 如果想让二级、三级也一起变 */
+.VPSidebarItem {
+  font-size: 18px;
+}
+
+
+
+
+/* =============================================================================
+   COMPONENTS - 侧边栏样式设置
+   ========================================================================== */
+:root {
+  --vp-sidebar-width: 300px;
+  --vp-layout-max-width: 1440px;
+}
+
+/* sidebar 本体 */
+.VPSidebar {
+  width: var(--vp-sidebar-width) !important;
+  padding-left: 12px !important;
+  padding-right: 12px !important;
+}
+
+/* 修复 navbar 左侧区域与 sidebar 宽度不一致 */
+.VPNavBar.has-sidebar .content {
+  padding-left: var(--vp-sidebar-width) !important;
+}
+
+/* 修复 navbar title 区域宽度 */
+.VPNavBarTitle.has-sidebar {
+  width: var(--vp-sidebar-width) !important;
+}
+
+/* sidebar 内容缩进 */
+.VPSidebarItem .item,
+.VPSidebarItem .link {
+  padding-left: 6px !important;
+  padding-right: 6px !important;
+}
+
+.VPSidebarItem .items {
+  padding-left: 8px !important;
+}
+
+.VPSidebarItem .text {
+  margin-left: 0 !important;
+}
+
+.VPNavBarTitle .title {
+  padding-left: 12px !important;
+}
+
+.VPNavBar.has-sidebar .content {
+  padding-left: 0 !important;
+}
+
+.VPNavBarTitle.has-sidebar {
+  width: auto !important;
+}
+/* ============================================================================= */
+
+
+
+
+
+
+
+
+
+
+
+/* =============================================================================
+   HOME - 首页纵向内容模块
+   ========================================================================== */
+
+.home-section-list {
+  position: relative;
+  z-index: 2;
+
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+
+  max-width: 1080px;
+  margin: 56px auto 96px;
+  padding: 0 32px;
+}
+
+/* 每个大模块 */
+.home-block {
+  position: relative;
+  overflow: hidden;
+
+  padding: 34px;
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.34),
+      rgba(255, 255, 255, 0.14)
+    );
+
+  backdrop-filter: blur(20px) saturate(150%);
+  -webkit-backdrop-filter: blur(20px) saturate(150%);
+
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  border-radius: 32px;
+
+  box-shadow:
+    0 18px 50px rgba(0, 0, 0, 0.16),
+    inset 0 1px 0 rgba(255, 255, 255, 0.32);
+
+  transition:
+    transform 0.28s ease,
+    box-shadow 0.28s ease,
+    border-color 0.28s ease;
+}
+
+.home-block::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+
+  background:
+    radial-gradient(circle at top left, rgba(255, 255, 255, 0.34), transparent 36%),
+    radial-gradient(circle at bottom right, rgba(255, 255, 255, 0.12), transparent 34%);
+
+  opacity: 0.8;
+}
+
+.home-block:hover {
+  transform: translateY(-6px);
+  border-color: rgba(255, 255, 255, 0.46);
+  box-shadow:
+    0 26px 70px rgba(0, 0, 0, 0.22),
+    inset 0 1px 0 rgba(255, 255, 255, 0.42);
+}
+
+.home-block > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* 顶部：图标 + 标题简介 */
+.home-block-header {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+
+  padding-bottom: 22px;
+  margin-bottom: 18px;
+
+  border-bottom: 1px solid rgba(255, 255, 255, 0.26);
+}
+
+.home-card-icon {
+  display: flex;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+
+  width: 62px;
+  height: 62px;
+
+  font-size: 30px;
+
+  background: rgba(255, 255, 255, 0.26);
+  border: 1px solid rgba(255, 255, 255, 0.32);
+  border-radius: 20px;
+
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.34);
+}
+
+.home-block-title h2 {
+  margin: 0 0 18px;
+  font-size: clamp(1.55rem, 3vw, 2rem);
+  line-height: 1.25;
+  font-weight: 800;
+  color: rgba(255, 255, 255, 0.96);
+  letter-spacing: -0.03em;
+  border: none
+}
+
+.home-block-title p {
+  margin: 0;
+  font-size: 1rem;
+  line-height: 1.75;
+  color: rgba(255, 255, 255, 0.82);
+}
+
+/* 标签 */
+.home-card-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+
+  margin: 0 0 22px;
+}
+
+.home-card-tags span {
+  display: inline-flex;
+  align-items: center;
+
+  padding: 5px 10px;
+
+  font-size: 0.76rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.86);
+
+  background: rgba(255, 255, 255, 0.14);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 999px;
+}
+
+/* 具体内容区域：一行一条，可以无限扩充 */
+.home-block-items {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+
+  margin-bottom: 24px;
+}
+
+/* 每一条内容 */
+.home-block-item {
+  display: grid;
+  grid-template-columns: 180px 1fr;
+  gap: 18px;
+  align-items: center;
+
+  padding: 16px 18px;
+
+  background: rgba(255, 255, 255, 0.14);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 18px;
+
+  text-decoration: none !important;
+
+  transition:
+    transform 0.22s ease,
+    background 0.22s ease,
+    border-color 0.22s ease,
+    box-shadow 0.22s ease;
+}
+
+.home-block-item:hover {
+  transform: translateX(6px);
+  background: rgba(255, 255, 255, 0.22);
+  border-color: rgba(255, 255, 255, 0.32);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.12);
+}
+
+.home-block-item strong {
+  font-size: 0.98rem;
+  font-weight: 780;
+  color: rgba(255, 255, 255, 0.96);
+}
+
+.home-block-item span {
+  font-size: 0.94rem;
+  line-height: 1.65;
+  color: rgba(255, 255, 255, 0.78);
+}
+
+/* 底部按钮 */
+.home-card-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 10px 17px;
+
+  font-size: 0.92rem;
+  font-weight: 750;
+  color: rgba(17, 24, 39, 0.92);
+
+  background: rgba(255, 255, 255, 0.82);
+  border: 1px solid rgba(255, 255, 255, 0.48);
+  border-radius: 999px;
+
+  text-decoration: none !important;
+
+  transition:
+    transform 0.2s ease,
+    background 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.home-card-button:hover {
+  transform: translateY(-2px);
+  background: rgba(255, 255, 255, 0.96);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.18);
+}
+
+/* 暗色模式 */
+.dark .home-block {
+  background:
+    linear-gradient(
+      135deg,
+      rgba(30, 30, 30, 0.56),
+      rgba(30, 30, 30, 0.28)
+    );
+
+  border-color: rgba(255, 255, 255, 0.14);
+}
+
+.dark .home-card-icon {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.14);
+}
+
+.dark .home-block-item {
+  background: rgba(255, 255, 255, 0.07);
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+.dark .home-block-item:hover {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(255, 255, 255, 0.18);
+}
+
+.dark .home-card-button {
+  color: rgba(248, 250, 252, 0.96);
+  background: rgba(255, 255, 255, 0.14);
+  border-color: rgba(255, 255, 255, 0.18);
+}
+
+.dark .home-card-button:hover {
+  background: rgba(255, 255, 255, 0.22);
+}
+
+/* 手机适配 */
+@media (max-width: 640px) {
+  .home-section-list {
+    gap: 22px;
+    margin: 36px auto 72px;
+    padding: 0 20px;
+  }
+
+  .home-block {
+    padding: 24px;
+    border-radius: 26px;
+  }
+
+  .home-block-header {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .home-card-icon {
+    width: 56px;
+    height: 56px;
+    font-size: 28px;
+  }
+
+  .home-block-item {
+    grid-template-columns: 1fr;
+    gap: 6px;
+    padding: 15px 16px;
+  }
+}
+
+/* ============================================================================= */
 
 
 
@@ -362,13 +733,401 @@ html {
 
 
 
-/* 内容区半透明 */
+/* =============================================================================
+   COMPONENTS - md内容样式：半透明毛玻璃 + 正文美化
+   ========================================================================== */
+
+/*
+  说明：
+  1. VitePress 文档页真正影响背景的层不止 .vp-doc，还有 .VPDoc / .VPContent / .content / .content-container。
+  2. 这里把外层清透明，然后只给正文容器 .content-container 做毛玻璃卡片。
+  3. 背景继续使用你 body 上的 /bg.png，因此透明效果会明显可见。
+*/
+
+/* 文档页外层全部透明，避免默认白底盖住 body 背景图 */
+.VPDoc,
+.VPDoc .container,
+.VPDoc .main,
+.VPDoc .content,
+.VPDoc .content-container,
+.VPDoc .aside,
+.VPDoc .aside-container,
+.VPDoc .aside-content {
+  background: transparent !important;
+}
+
+/* VitePress 主内容区域：默认透明，不再单独铺一层灰白背景 */
 .VPContent {
-  background: var(--content-light);
+  background: transparent !important;
 }
 
 .dark .VPContent {
-  background: var(--content-dark);
+  background: transparent !important;
+}
+
+/* 文档正文卡片：真正的半透明毛玻璃效果 */
+.VPDoc .content-container {
+  position: relative;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 40px 46px;
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.56),
+      rgba(255, 255, 255, 0.28)
+    ) !important;
+
+  backdrop-filter: blur(22px) saturate(160%);
+  -webkit-backdrop-filter: blur(22px) saturate(160%);
+
+  border: 1px solid rgba(255, 255, 255, 0.42);
+  border-radius: 28px;
+
+  box-shadow:
+    0 24px 70px rgba(0, 0, 0, 0.18),
+    inset 0 1px 0 rgba(255, 255, 255, 0.58);
+
+  overflow: hidden;
+}
+
+/* 给正文卡片增加轻微高光，让玻璃质感更明显 */
+.VPDoc .content-container::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  border-radius: inherit;
+
+  background:
+    radial-gradient(circle at 0% 0%, rgba(255, 255, 255, 0.36), transparent 34%),
+    radial-gradient(circle at 100% 0%, rgba(255, 255, 255, 0.18), transparent 28%);
+
+  opacity: 0.8;
+}
+
+/* 确保正文内容在高光层上方 */
+.VPDoc .content-container > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* Markdown 正文基础排版 */
+.vp-doc {
+  background: transparent !important;
+  color: rgba(24, 24, 27, 0.92);
+  font-size: 16px;
+  line-height: 1.9;
+  letter-spacing: 0.01em;
+}
+
+/* 正文标题 */
+.vp-doc h1 {
+  margin-bottom: 28px;
+  padding-bottom: 18px;
+  font-size: clamp(2rem, 4vw, 2.65rem);
+  line-height: 1.18;
+  font-weight: 850;
+  letter-spacing: -0.04em;
+  color: rgba(17, 24, 39, 0.96);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.34);
+}
+
+.vp-doc h2 {
+  margin-top: 46px;
+  padding-bottom: 10px;
+  font-size: clamp(1.45rem, 3vw, 1.85rem);
+  line-height: 1.3;
+  font-weight: 780;
+  letter-spacing: -0.02em;
+  color: rgba(30, 64, 175, 0.96);
+  border-bottom: 1px solid rgba(96, 165, 250, 0.28);
+}
+
+.vp-doc h3 {
+  margin-top: 34px;
+  font-size: 1.25rem;
+  font-weight: 720;
+  color: rgba(51, 65, 85, 0.96);
+}
+
+.vp-doc h4,
+.vp-doc h5,
+.vp-doc h6 {
+  color: rgba(51, 65, 85, 0.92);
+}
+
+/* 段落和列表 */
+.vp-doc p,
+.vp-doc li {
+  color: rgba(51, 65, 85, 0.95);
+}
+
+.vp-doc p {
+  margin: 16px 0;
+}
+
+.vp-doc ul,
+.vp-doc ol {
+  padding-left: 1.4rem;
+}
+
+.vp-doc li + li {
+  margin-top: 6px;
+}
+
+/* 链接 */
+.vp-doc a {
+  color: #2563eb;
+  font-weight: 650;
+  text-decoration: none;
+  border-bottom: 1px dashed rgba(37, 99, 235, 0.45);
+  transition:
+    color 0.2s ease,
+    border-color 0.2s ease,
+    background 0.2s ease;
+}
+
+.vp-doc a:hover {
+  color: #1d4ed8;
+  border-bottom-color: rgba(29, 78, 216, 0.88);
+  background: rgba(37, 99, 235, 0.08);
+}
+
+/* 行内代码 */
+.vp-doc :not(pre) > code {
+  color: #be185d;
+  background: rgba(255, 255, 255, 0.42);
+  border: 1px solid rgba(244, 114, 182, 0.26);
+  border-radius: 8px;
+  padding: 2px 7px;
+  font-size: 0.9em;
+  font-weight: 650;
+}
+
+/* 代码块 */
+/* 白天模式代码块：浅色玻璃效果 */
+.vp-doc div[class*="language-"] {
+  margin: 24px 0;
+  border-radius: 18px;
+  overflow: hidden;
+
+  background: rgba(255, 255, 255, 0.62) !important;
+  border: 1px solid rgba(148, 163, 184, 0.24);
+
+  box-shadow:
+    0 14px 32px rgba(15, 23, 42, 0.10),
+    inset 0 1px 0 rgba(255, 255, 255, 0.52);
+}
+
+/* 白天模式代码块内部 */
+.vp-doc div[class*="language-"] pre {
+  background: transparent !important;
+  color: #1f2937 !important;
+  padding: 20px 22px;
+}
+
+/* 白天模式代码文字 */
+.vp-doc div[class*="language-"] code {
+  color: #1f2937 !important;
+}
+
+.vp-doc div[class*="language-"] pre {
+  padding: 20px 22px;
+}
+
+/* 引用块 */
+.vp-doc blockquote {
+  margin: 24px 0;
+  padding: 16px 20px;
+  color: rgba(30, 41, 59, 0.92);
+  background: rgba(239, 246, 255, 0.48);
+  border-left: 4px solid rgba(59, 130, 246, 0.82);
+  border-radius: 14px;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.28);
+}
+
+.vp-doc blockquote p {
+  margin: 0;
+}
+
+/* 表格 */
+.vp-doc table {
+  display: table;
+  width: 100%;
+  margin: 26px 0;
+  overflow: hidden;
+  border-collapse: separate;
+  border-spacing: 0;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.34);
+  box-shadow: 0 12px 28px rgba(15, 23, 42, 0.1);
+}
+
+.vp-doc th {
+  background: rgba(255, 255, 255, 0.52);
+  color: rgba(15, 23, 42, 0.96);
+  font-weight: 760;
+}
+
+.vp-doc th,
+.vp-doc td {
+  padding: 13px 16px;
+  border-color: rgba(148, 163, 184, 0.24);
+}
+
+/* 图片 */
+.vp-doc img {
+  border-radius: 18px;
+  box-shadow: 0 18px 42px rgba(15, 23, 42, 0.2);
+}
+
+/* 分割线 */
+.vp-doc hr {
+  border: none;
+  height: 1px;
+  background: linear-gradient(
+    to right,
+    transparent,
+    rgba(148, 163, 184, 0.52),
+    transparent
+  );
+}
+
+/* 右侧目录区域也做轻微透明，和正文统一 */
+.VPDocAsideOutline .content {
+  padding: 12px 14px;
+  background: rgba(255, 255, 255, 0.26);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  border-radius: 16px;
+}
+
+/* 暗色模式 */
+.dark .VPDoc .content-container {
+  background:
+    linear-gradient(
+      135deg,
+      rgba(17, 24, 39, 0.72),
+      rgba(17, 24, 39, 0.42)
+    ) !important;
+
+  border-color: rgba(148, 163, 184, 0.22);
+  box-shadow:
+    0 24px 70px rgba(0, 0, 0, 0.38),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+.dark .VPDoc .content-container::before {
+  background:
+    radial-gradient(circle at 0% 0%, rgba(96, 165, 250, 0.16), transparent 34%),
+    radial-gradient(circle at 100% 0%, rgba(168, 85, 247, 0.12), transparent 28%);
+}
+
+.dark .vp-doc {
+  color: rgba(226, 232, 240, 0.94);
+}
+
+.dark .vp-doc h1 {
+  color: rgba(248, 250, 252, 0.98);
+  border-bottom-color: rgba(148, 163, 184, 0.2);
+}
+
+.dark .vp-doc h2 {
+  color: rgba(147, 197, 253, 0.98);
+  border-bottom-color: rgba(147, 197, 253, 0.2);
+}
+
+.dark .vp-doc h3,
+.dark .vp-doc h4,
+.dark .vp-doc h5,
+.dark .vp-doc h6 {
+  color: rgba(203, 213, 225, 0.96);
+}
+
+.dark .vp-doc p,
+.dark .vp-doc li {
+  color: rgba(203, 213, 225, 0.92);
+}
+
+.dark .vp-doc :not(pre) > code {
+  color: #f9a8d4;
+  background: rgba(15, 23, 42, 0.42);
+  border-color: rgba(244, 114, 182, 0.18);
+}
+
+.dark .vp-doc blockquote {
+  color: rgba(203, 213, 225, 0.94);
+  background: rgba(30, 41, 59, 0.46);
+  border-left-color: rgba(96, 165, 250, 0.86);
+}
+
+.dark .vp-doc table {
+  background: rgba(15, 23, 42, 0.34);
+}
+
+.dark .vp-doc th {
+  background: rgba(30, 41, 59, 0.66);
+  color: rgba(248, 250, 252, 0.96);
+}
+
+.dark .VPDocAsideOutline .content {
+  background: rgba(15, 23, 42, 0.36);
+  border-color: rgba(148, 163, 184, 0.18);
+}
+
+
+/* 暗色模式代码块：保持深色 */
+.dark .vp-doc div[class*="language-"] {
+  background: rgba(15, 23, 42, 0.88) !important;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+
+  box-shadow:
+    0 18px 40px rgba(15, 23, 42, 0.24),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+.dark .vp-doc div[class*="language-"] pre {
+  background: transparent !important;
+  color: #e5e7eb !important;
+}
+
+.dark .vp-doc div[class*="language-"] code {
+  color: #e5e7eb !important;
+}
+
+
+
+/* 移动端适配 */
+@media (max-width: 768px) {
+  .VPDoc .content-container {
+    max-width: none;
+    margin: 0 12px;
+    padding: 28px 22px;
+    border-radius: 22px;
+  }
+
+  .vp-doc {
+    font-size: 15.5px;
+  }
+}
+
+
+/* ============================================================================= */
+
+
+
+
+
+/* 内容区透明：md 毛玻璃效果由 .VPDoc .content-container 控制 */
+.VPContent {
+  background: transparent !important;
+}
+
+.dark .VPContent {
+  background: transparent !important;
 }
 
 /* Hero 整体上边距 */
@@ -487,6 +1246,95 @@ html {
 }
 
 
+/* =============================================================================
+   FIX - 顶部导航栏滚动后样式修复
+   ========================================================================== */
+
+/* 顶部导航整体固定为统一毛玻璃样式 */
+.VPNav,
+.VPNavBar,
+.VPNavBar .container,
+.VPNavBar .content,
+.VPNavBar .content-body,
+.VPNavBarTitle,
+.VPNavBarTitle .title {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+/* 真正给顶部导航加背景，只保留一层，避免滚动后叠加出错 */
+.VPNavBar {
+  background: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0.82),
+    rgba(255, 255, 255, 0.48),
+    rgba(255, 255, 255, 0)
+  ) !important;
+
+  backdrop-filter: blur(16px) saturate(160%);
+  -webkit-backdrop-filter: blur(16px) saturate(160%);
+}
+
+/* 暗色模式导航栏 */
+.dark .VPNavBar {
+  background: linear-gradient(
+    to bottom,
+    rgba(20, 20, 20, 0.76),
+    rgba(20, 20, 20, 0.44),
+    rgba(20, 20, 20, 0)
+  ) !important;
+}
+
+/* 去掉滚动后 VitePress 自动加的 shadow / divider / line */
+.VPNavBar.has-sidebar,
+.VPNavBar:not(.home),
+.VPNavBar:not(.home.top),
+.VPNavBar.fill,
+.VPNavBar.top {
+  border: none !important;
+  box-shadow: none !important;
+}
+
+.VPNavBar .divider,
+.VPNavBar .divider-line,
+.VPNavBarTitle .divider,
+.VPNavBarTitle .divider-line,
+.VPNavScreenAppearance,
+.VPNavBarAppearance::before,
+.VPNavBarAppearance::after,
+.VPNavBarSocialLinks::before,
+.VPNavBarSocialLinks::after {
+  border: none !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+/* 修复 has-sidebar 状态下 title 区域变成一块深色的问题 */
+.VPNavBarTitle.has-sidebar,
+.VPNavBarTitle.has-sidebar .title {
+  width: auto !important;
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+/* 保证文档页 / 首页 navbar 一致，不被 sidebar 推开 */
+.VPNavBar.has-sidebar .content {
+  padding-left: 0 !important;
+}
+
+/* 顶部导航文字区域不要出现额外遮罩 */
+.VPNavBarMenu,
+.VPNavBarMenuLink,
+.VPNavBarExtra,
+.VPNavBarSearch,
+.VPNavBarSocialLinks {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
 
 
 
@@ -520,8 +1368,7 @@ html {
 
 
 
-
-
+  
 
 
 
