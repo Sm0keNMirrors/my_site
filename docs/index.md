@@ -26,8 +26,8 @@ hero:
     <div class="home-card-icon">📚</div>
     <div class="home-block-title">
       <h2>科研成果</h2>
-      <!-- <p>汇总我的论文、研究方向、实验记录、项目成果以及阶段性学术产出。</p> -->
     </div>
+    
   </div>
 
   <!-- <div class="home-card-tags">
@@ -37,21 +37,57 @@ hero:
   </div> -->
 
   <div class="home-block-items">
-    <!-- <a class="home-block-item" href="/research/direction/"> -->
-      <!-- <strong>研究方向整理</strong> -->
-      <!-- <span>记录当前关注的研究主题、问题定义与后续计划。</span> -->
-    <!-- </a> -->
-    <!-- <a class="home-block-item" href="/research/papers/">
-      <strong>论文阅读笔记</strong>
-      <span>整理重点论文的核心方法、实验结果和个人理解。</span>
-    </a> -->
-    <!-- <a class="home-block-item" href="/research/experiments/">
-      <strong>实验记录</strong>
-      <span>保存实验配置、结果对比、失败案例和复现实践。</span>
-    </a> -->
+    <PaperCard 
+      title="Characterization of winter PM2.5 source contributions and impacts of meteorological conditions and anthropogenic emission changes in the Sichuan Basin, 2002–2020"
+      doi="10.1016/j.scitotenv.2024.174557"
+      journal="Science of the total environment"
+      journalUrl="https://www.sciencedirect.com/journal/science-of-the-total-environment"
+      abstract="In this study, the Weather Research and Forecasting (WRF) model and Community Multiscale Air Quality–Integrated Source Apportionment Method (CMAQ–ISAM) were utilized, which were integrated with the Multiresolution Emission Inventory for China (MEIC) emission inventory, to simulate winter PM2.5 concentrations, regional transport, and changes in emission source contributions in the Sichuan basin (SCB) from 2002 to 2020, considering variations in meteorological conditions and anthropogenic emissions. The results indicated a gradual decrease in the basin's winter average PM2.5 concentration from 300 μg/m3 to 120 μg/m3, with the most significant decrease occurring after 2014, reflecting the actual impact of China's air pollution control measures. Spatially, the main pollution area shifted from Chongqing to Chengdu and the western basin. The sources of PM2.5 at the eastern and western margins of the basin have remained stable and have been dominated by local emissions for many years, while the sources of PM2.5 in the central part of the basin have evolved from a multiregional co-influenced source during the early period to a high proportion of local emissions; except for boundary condition sources, residential sources were the main PM2.5 sources in the basin (approximately 29.70 %), followed by industrial sources (approximately 14.11 %). Industrial sources exhibited higher contributions in Chengdu and Chongqing and gradually stabilized with residential sources over the years, while residential sources dominated in the eastern and western parts of the basin and exhibited a declining trend. Meteorological conditions exacerbated pollution in the whole basin from 2008 to 2014, especially in the west (21–40 μg/m3). The eastern basin and Chongqing exhibited more years with alleviated meteorological pollution, including a 40+ μg/m3 decrease in Chongqing from 2002 to 2005. Reduced anthropogenic emissions alleviated annual pollution levels, with a greater reduction (> −20 μg/m3) after 2011 due to pollution control measures."
+    />
+    <PaperCard 
+      title="Source apportionment and formation of warm season ozone pollution in Chengdu based on CMAQ-ISAM"
+      doi="10.1016/j.uclim.2024.102017"
+      journal="urban Climate"
+      journalUrl="https://www.sciencedirect.com/journal/urban-climate"
+      abstract="In this study, the WRF-CMAQ model integrated with BEM urban canopy model was used to simulate the concentrations of Ozone (O3) and its precursors, NOx and VOCs, in warm season of Chengdu, conduct source apportionment and formation analysis. The results show that the O3 in Chengdu exhibits a west-high/east-low spatial pattern, attributable to nearly 40% contribution from boundary sources representing the transport role of the Sichuan Basin, regional sources from districts emitting high precursor concentrations, and increasing biogenic contributions from western areas due to rising BVOCs emissions during the warm season. NOx from traffic and VOCs from industrial sources, both prevalent in Chengdu's high urban density areas, chemically react to form O3, making these sectors primary contributors to O3. NOx photochemical reactions producing O3 occur at 150 m–2500 m with peak generation rates of 10 μg/(m3·hr). Ground-level NO titration removal is most significant during heavy traffic (14:00–21:00), ranging from −70 to −200 μg/(m3·hr). O3 is replenished through similar rates of daytime vertical diffusion and nighttime horizontal advection, correlating with urban density across regions. Controlling Chengdu's warm season O3 requires focusing on long-distance external transport and regional precursor emission reductions, with strategies tailored to local urban characteristics."
+    />
   </div>
 
   <!-- <a class="home-card-button" href="/research/">查看全部科研成果</a> -->
+</section>
+
+
+<section class="home-block">
+  <div class="home-block-header">
+    <div class="home-card-icon">🛠️</div>
+    <div class="home-block-title">
+      <h2>实用工具</h2>
+      <!-- <p>记录我常用的开发工具、科研工具、效率工具和环境配置方案。</p> -->
+    </div>
+  </div>
+
+  <div class="home-card-tags">
+    <span>Tools</span>
+    <span>Workflow</span>
+    <span>Setup</span>
+  </div>
+
+  <div class="home-block-items">
+    <a class="home-block-item" href="/tools/dev/">
+      <strong>开发环境</strong>
+      <span>编辑器、终端、Git、Node、Python 等环境配置。</span>
+    </a>
+    <a class="home-block-item" href="/tools/research/">
+      <strong>科研工具</strong>
+      <span>论文管理、实验记录、数据处理和绘图工具。</span>
+    </a>
+    <a class="home-block-item" href="/tools/workflow/">
+      <strong>效率工具</strong>
+      <span>任务管理、知识库、自动化脚本和个人工作流。</span>
+    </a>
+  </div>
+
+  <a class="home-card-button" href="/tools/">查看全部使用工具</a>
 </section>
 
 <section class="home-block">
@@ -87,38 +123,7 @@ hero:
   <a class="home-card-button" href="/notes/">查看全部笔记资料</a>
 </section>
 
-<section class="home-block">
-  <div class="home-block-header">
-    <div class="home-card-icon">🛠️</div>
-    <div class="home-block-title">
-      <h2>实用工具</h2>
-      <!-- <p>记录我常用的开发工具、科研工具、效率工具和环境配置方案。</p> -->
-    </div>
-  </div>
 
-  <div class="home-card-tags">
-    <span>Tools</span>
-    <span>Workflow</span>
-    <span>Setup</span>
-  </div>
-
-  <div class="home-block-items">
-    <a class="home-block-item" href="/tools/dev/">
-      <strong>开发环境</strong>
-      <span>编辑器、终端、Git、Node、Python 等环境配置。</span>
-    </a>
-    <a class="home-block-item" href="/tools/research/">
-      <strong>科研工具</strong>
-      <span>论文管理、实验记录、数据处理和绘图工具。</span>
-    </a>
-    <a class="home-block-item" href="/tools/workflow/">
-      <strong>效率工具</strong>
-      <span>任务管理、知识库、自动化脚本和个人工作流。</span>
-    </a>
-  </div>
-
-  <a class="home-card-button" href="/tools/">查看全部使用工具</a>
-</section>
 
 <section class="home-block">
   <div class="home-block-header">
