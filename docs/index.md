@@ -30,28 +30,28 @@ hero:
     </div>
   </div>
 
-  <div class="home-card-tags">
+  <!-- <div class="home-card-tags">
     <span>Paper</span>
     <span>Research</span>
     <span>Experiment</span>
-  </div>
+  </div> -->
 
   <div class="home-block-items">
-    <a class="home-block-item" href="/research/direction/">
-      <strong>研究方向整理</strong>
+    <!-- <a class="home-block-item" href="/research/direction/"> -->
+      <!-- <strong>研究方向整理</strong> -->
       <!-- <span>记录当前关注的研究主题、问题定义与后续计划。</span> -->
-    </a>
-    <a class="home-block-item" href="/research/papers/">
+    <!-- </a> -->
+    <!-- <a class="home-block-item" href="/research/papers/">
       <strong>论文阅读笔记</strong>
       <span>整理重点论文的核心方法、实验结果和个人理解。</span>
-    </a>
-    <a class="home-block-item" href="/research/experiments/">
+    </a> -->
+    <!-- <a class="home-block-item" href="/research/experiments/">
       <strong>实验记录</strong>
       <span>保存实验配置、结果对比、失败案例和复现实践。</span>
-    </a>
+    </a> -->
   </div>
 
-  <a class="home-card-button" href="/research/">查看全部科研成果</a>
+  <!-- <a class="home-card-button" href="/research/">查看全部科研成果</a> -->
 </section>
 
 <section class="home-block">
